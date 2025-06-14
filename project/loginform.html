@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up and Login Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #e0e5ec;
+        background-image: url("./assets/images/Gemini_Generated_Image_3xe9vi3xe9vi3xe9.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .form-container {
+        width: 300px;
+        padding: 20px;
+        background: #e0e5ec;
+        box-shadow: 9px 9px 16px #b8bcc2, -9px -9px 16px #ffffff;
+        border-radius: 12px;
+      }
+      .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      .form-container form {
+        display: flex;
+        flex-direction: column;
+      }
+      .form-container input {
+        margin-bottom: 15px;
+        padding: 10px;
+        background: #e0e5ec;
+        box-shadow: inset 3px 3px 6px #b8bcc2, inset -3px -3px 6px #ffffff;
+        border: none;
+        border-radius: 4px;
+        outline: none;
+      }
+      .form-container button {
+        padding: 10px;
+        background: #e0e5ec;
+        box-shadow: 3px 3px 6px #b8bcc2, -3px -3px 6px #ffffff;
+        border: none;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .form-container button:hover {
+        box-shadow: inset 3px 3px 6px #b8bcc2, inset -3px -3px 6px #ffffff;
+      }
+      .form-container .toggle-link {
+        text-align: center;
+        margin-top: 10px;
+      }
+      .form-container .toggle-link a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .form-container .toggle-link a:hover {
+        text-decoration: underline;
+      }
+
+      .guest {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        color: #007bff;
+        text-decoration: none;
+      }
+      .error-message {
+        color: red;
+        font-size: 0.8em;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        display: none;
+      }
+      .success-message {
+        color: green;
+        font-size: 0.9em;
+        text-align: center;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container" id="signup-form">
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+        <input type="email" placeholder="Email" id="signupEmail" required />
+        <input
+          type="password"
+          placeholder="Password"
+          id="signupPassword"
+          required
+        />
+        <div id="signupPasswordError" class="error-message"></div>
+        <div id="signupSuccess" class="success-message"></div>
+        <button type="submit">Sign Up</button>
+      </form>
+      <div class="toggle-link">
+        Already have an account? <a href="#" onclick="showLoginForm()">Login</a>
+      </div>
+    </div>
+
+    <div class="form-container" id="login-form" style="display: none">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" id="loginEmail" required />
+        <input
+          type="password"
+          placeholder="Password"
+          id="loginPassword"
+          required
+        />
+        <div id="loginError" class="error-message"></div>
+
+        <button type="submit">Login</button>
+
+        <div
+          id="loader"
+          style="display: none; text-align: center; margin-top: 10px"
+        >
+          <span>Loading...</span>
+        </div>
+      </form>
+      <div class="toggle-link">
+        Don't have an account?
+        <a href="#" onclick="showSignupForm()">Sign Up</a>
+      </div>
+      <a class="guest" onclick="window.location.href='index.html'"
+        >Login as guest</a
+      >
+    </div>
+
+    <script>
+      function showLoginForm() {
+        document.getElementById("signup-form").style.display = "none";
+        document.getElementById("login-form").style.display = "block";
+        // Clear login form fields and messages when switching
+        document.getElementById("loginEmail").value = "";
+        document.getElementById("loginPassword").value = "";
+        document.getElementById("loginError").style.display = "none";
+      }
+
+      function showSignupForm() {
+        document.getElementById("login-form").style.display = "none";
+        document.getElementById("signup-form").style.display = "block";
+        // Clear signup form fields and messages when switching
+        document.getElementById("signupEmail").value = "";
+        document.getElementById("signupPassword").value = "";
+        document.getElementById("signupPasswordError").style.display = "none";
+        document.getElementById("signupSuccess").style.display = "none";
+      }
+
+      // Live validation for signup password input
+      document
+        .getElementById("signupPassword")
+        .addEventListener("input", function () {
+          const password = this.value;
+          const passwordError = document.getElementById("signupPasswordError");
+          const passwordRegex =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+
+          if (!passwordRegex.test(password) && password.length > 0) {
+            passwordError.textContent =
+              "Password must be at least 8 characters, with an uppercase, lowercase, number, and special character.";
+            passwordError.style.display = "block";
+          } else {
+            passwordError.style.display = "none";
+          }
+        });
+
+      // Sign Up Form Submission
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = document.getElementById("signupEmail").value;
+          const password = document.getElementById("signupPassword").value;
+          const passwordError = document.getElementById("signupPasswordError");
+          const signupSuccess = document.getElementById("signupSuccess");
+          const passwordRegex =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+
+          if (!passwordRegex.test(password)) {
+            passwordError.textContent =
+              "Password must be at least 8 characters, with an uppercase, lowercase, number, and special character.";
+            passwordError.style.display = "block";
+            signupSuccess.style.display = "none";
+          } else {
+            passwordError.style.display = "none";
+
+            // Store credentials in localStorage
+            localStorage.setItem("registeredEmail", email);
+            localStorage.setItem("registeredPassword", password);
+
+            signupSuccess.textContent = "Sign up successful! Please log in.";
+            signupSuccess.style.display = "block";
+
+            // Clear the form after successful sign-up
+            document.getElementById("signupEmail").value = "";
+            document.getElementById("signupPassword").value = "";
+
+            // Automatically switch to login form after a short delay
+            setTimeout(showLoginForm, 1500);
+          }
+        });
+
+      // Login Form Submission
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = document.getElementById("loginEmail").value;
+          const password = document.getElementById("loginPassword").value;
+          const loginError = document.getElementById("loginError");
+          const loader = document.getElementById("loader");
+          const loginButton = document.querySelector(
+            '#login-form button[type="submit"]'
+          );
+
+          // Get stored credentials
+          const storedEmail = localStorage.getItem("registeredEmail");
+          const storedPassword = localStorage.getItem("registeredPassword");
+
+          if (!storedEmail || !storedPassword) {
+            loginError.textContent =
+              "No account registered. Please sign up first.";
+            loginError.style.display = "block";
+            return; // Stop execution
+          }
+
+          if (email === storedEmail && password === storedPassword) {
+            loginError.style.display = "none";
+            loginButton.disabled = true;
+            loader.style.display = "block";
+
+            setTimeout(function () {
+              window.location.href = "index.html"; // Redirect on successful login
+            }, 1500);
+          } else {
+            loginError.textContent = "Invalid email or password.";
+            loginError.style.display = "block";
+            loginButton.disabled = false; // Ensure button is re-enabled if invalid
+          }
+        });
+
+      // Clear login error message on input change
+      document.getElementById("loginEmail").addEventListener("input", function() {
+        document.getElementById("loginError").style.display = "none";
+      });
+      document.getElementById("loginPassword").addEventListener("input", function() {
+        document.getElementById("loginError").style.display = "none";
+      });
+
+    </script>
+  </body>
+</html>

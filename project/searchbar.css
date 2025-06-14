@@ -1,0 +1,104 @@
+.btn0{
+    background-color: #1c68416b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #b2f5d1;
+}
+
+header {
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#search {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#crypto-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.crypto-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px; 
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: "#12211e";
+}
+
+.crypto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.crypto-card img {
+    border-radius: 50%; 
+    margin-bottom: 10px; 
+}
+
+.crypto-card h3 {
+    font-size: 1.2em;
+    margin: 10px 0; 
+    color: #333; 
+}
+
+.crypto-card p {
+    font-size: 1em; 
+    color: #666;
+    margin: 5px 0; 
+}
+
+.crypto-card .price {
+    font-weight: bold; 
+    color: #2ecc71;
+}
+
+.header1 button {
+                background-color: #1c68416b;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: background 0.2s;
+                margin-right: 16px;
+            }
+            .header1 button:hover {
+                background-color: #4a5568;
+            }
+            .header1 button {
+                padding: 4px 10px;
+                font-size: 0.85rem;
+                border-radius: 3px;
+                margin-right: 8px;
+                height: 20px;
+            }
